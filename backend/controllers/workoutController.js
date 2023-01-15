@@ -1,8 +1,6 @@
 const WorkoutModel = require('../models/WorkoutModel');
 const mongoose = require('mongoose');
 
-
-
 //1--Get all workouts
 const getAllWorkouts = async (req, res) => {
     try {
@@ -78,8 +76,6 @@ const updateWorkout = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-
-
 
 module.exports = {
     getAllWorkouts,
