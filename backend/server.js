@@ -8,19 +8,13 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 const connectionString = process.env.MONGO_URI;
-
-
-
-
-
-
-
+//middleware
+app.use(express.json());
 
 //routes
 app.use('/api/workout', workoutRoutes);
 
-//middleware
-app.use(express.json());
+
 
 //routes
 app.get("/", (req, res) => {
