@@ -15,6 +15,9 @@ const WorkoutForm = () => {
     // useState hook to create a state variable for error message and a function to update it
     const [error, setError] = useState(null)
 
+    const [emptyFields, setEmptyFields] = useState([])
+
+
     // handleSubmit function to send a POST request to server on form submission
     const handleSubmit = async (e) => {
         // prevent default form submission behavior
@@ -38,9 +41,11 @@ const WorkoutForm = () => {
         if (!response.ok) {
             // if unsuccessful, update the error state with the error message
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
             // if successful, clear the error message, clear the form inputs and log the response
+            setEmptyFields([])
             setError(null)
             setTitle('')
             setLoad('')
@@ -61,6 +66,8 @@ const WorkoutForm = () => {
                 type="text"
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
+                className={emptyFields.includes('title') ? 'error' : ''}
+
             />
 
             <label>Load (in kg):</label>
@@ -68,13 +75,16 @@ const WorkoutForm = () => {
                 type="number"
                 onChange={(e) => setLoad(e.target.value)}
                 value={load}
+                className={emptyFields.includes('load') ? 'error' : ''}
+
             />
 
             <label>Number of Reps:</label>
             <input
                 type="number"
                 onChange={(e) => setReps(e.target.value)}
-                value={reps}
+                value={reps}              
+                className={emptyFields.includes('reps') ? 'error' : ''}
             />
 
             <button>Add Workout</button>

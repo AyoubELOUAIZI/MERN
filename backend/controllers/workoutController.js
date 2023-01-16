@@ -32,7 +32,26 @@ const getWorkout = async (req, res) => {
 
 //3--post a new workout
 const createWorkout = async (req, res) => { // listen to post request on '/'
+
     const { title, load, reps } = req.body // destructuring the request body to extract the title, load, and reps
+
+
+    let emptyFields = []
+
+    if (!title) {
+        emptyFields.push('title')
+    }
+    if (!load) {
+        emptyFields.push('load')
+    }
+    if (!reps) {
+        emptyFields.push('reps')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
+    }
+
+
    //add doc to db
     try {
         const workout = await WorkoutModel.create({ title, load, reps }) // create new workout using the destructured data //i did the change from workout to WorkoutModel
