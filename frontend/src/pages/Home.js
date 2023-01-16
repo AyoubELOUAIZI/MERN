@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from "react"
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 
 //components
 import WorkoutDetails from '../components/WorkoutDetails';
@@ -7,7 +8,9 @@ import WorkoutForm from '../components/WorkoutForm';
 
 const Home = () => {
     // state variable to hold the data
-    const [workouts, setWorkouts] = useState(null);
+  //'''''''  const [workouts, setWorkouts] = useState(null);
+    const { workouts, dispatch } = useWorkoutsContext()
+
 
     // useEffect hook to fetch data from the server
     useEffect(() => {
@@ -20,7 +23,9 @@ const Home = () => {
                 const json = await response.json();
                 // update the state with the fetched data
                 if (response.ok) {
-                    setWorkouts(json);
+                 //'''''''   setWorkouts(json);
+                    dispatch({ type: 'SET_WORKOUTS', payload: json })
+
                 }
             } catch (error) {
                 //handle any errors that occur during the fetch
@@ -29,7 +34,9 @@ const Home = () => {
         }
         // call the function to fetch the data
         fetchWorkouts();
-    }, []);
+  // '''' }, []);
+ }, [dispatch])
+
 
     return (
         <div className="home">
