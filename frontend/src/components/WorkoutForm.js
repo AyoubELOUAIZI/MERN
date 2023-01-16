@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 
-
 const WorkoutForm = () => {
     const { dispatch } = useWorkoutsContext()
-
 
     // useState hook to create a state variable for the workout title and a function to update it
     const [title, setTitle] = useState('')
@@ -22,7 +20,6 @@ const WorkoutForm = () => {
     const handleSubmit = async (e) => {
         // prevent default form submission behavior
         e.preventDefault()
-
         // create an object with the workout data from the state variables
         const workout = { title, load, reps }
 
@@ -52,7 +49,6 @@ const WorkoutForm = () => {
             setReps('')
           //  console.log('new workout added:', json)
             dispatch({ type: 'CREATE_WORKOUT', payload: json })
-
         }
     }
 
@@ -67,7 +63,6 @@ const WorkoutForm = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
                 className={emptyFields.includes('title') ? 'error' : ''}
-
             />
 
             <label>Load (in kg):</label>
@@ -76,7 +71,6 @@ const WorkoutForm = () => {
                 onChange={(e) => setLoad(e.target.value)}
                 value={load}
                 className={emptyFields.includes('load') ? 'error' : ''}
-
             />
 
             <label>Number of Reps:</label>
@@ -92,5 +86,4 @@ const WorkoutForm = () => {
         </form>
     )
 }
-
 export default WorkoutForm
